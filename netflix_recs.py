@@ -50,16 +50,22 @@ def filter_movies(num):
     if num == "1":
         critics_choice = input("How low will you go on a rating scale from 0 to 100?")
         goodtitles = {key: value['critics'] for (key, value) in movies.items() if value['critics'].rstrip("%") > critics_choice}
-        print(goodtitles)
+        pretty(goodtitles)
 
     elif num == "2":
         audience_choice = input("How low will you go on a rating scale from 0 to 100?")
         goodtitles = {key: value['audience'] for (key, value) in movies.items() if value['audience'] > audience_choice}
-        print(goodtitles)
+        pretty(goodtitles)
         
     else: 
         try_again = input("oops, you didn't enter 1 (critics rating) or 2 (audience rating). Please try again")
         filter_movies(try_again)
+
+def pretty(goodtitles):
+    print("{:<55}{:<8}".format('Movie','Rating'))
+    for k,v in goodtitles.items():
+          num = v
+          print("{:<55}{:<8}".format(k,num))
 
 #PROGRAM STARTS HERE 
 for movie in soup.find_all('a', class_="ovr"):
